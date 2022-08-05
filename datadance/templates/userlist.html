@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>用户管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
+
+    <!-- Plugins css -->
+
+
+    <!-- App css -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function changePage(opr, currentPage, pageSize, totalPage){
+            if(opr == "first"){
+                if(currentPage == 1)
+                    return
+                currentPage = 1
+            }else if(opr == "pre"){
+                if(currentPage == 1)
+                    return
+                currentPage -= 1
+            }else if(opr == "next"){
+                if(currentPage == totalPage)
+                    return
+                currentPage += 1
+            }else if(opr == "last"){
+                if(currentPage == totalPage)
+                    return
+                currentPage = totalPage
+            }
+            document.searchForm.currentPage.value = currentPage
+            document.searchForm.pageSize.value = pageSize
+            document.searchForm.submit()
+        }
+        function removeUser(userId){
+            if(confirm("确定要删除吗？")){
+                document.searchForm.userId.value = userId
+                document.searchForm.opr.value = "del"
+                document.searchForm.submit()
+            }
+        }
+        function updateUser(userId, userName, realName){
+            document.updateForm.userId.value = userId
+            document.updateForm.userName.value = userName
+            document.updateForm.realName.value = realName
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <!-- ========== Left Sidebar Start ========== -->
+        {% include 'leftbar.html' %}
+        <!-- Left Sidebar End -->
+
+        {% include 'header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">系统管理</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item">系统管理</li>
+                                        <li class="breadcrumb-item active">用户管理</li>
+                                    </ol>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>     
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-12">
+                             <div class="card">
+                                <div class="card-body">
+                                    <p class="card-subtitle mb-4">
+                                        <form action="/userlist" method="post" name="searchForm" class="form-inline">
+                                            用户名：<input type="text" name="searchName" value="{{ search.userName }}" class="form-control">
+                                            <input type="hidden" name="currentPage" value="1">
+                                            <input type="hidden" name="pageSize" value="{{ page.pageSize }}">
+                                            <input type="hidden" name="userId">
+                                            <input type="hidden" name="opr">&nbsp
+                                            <button type="submit" class="btn btn-primary">查询</button>&nbsp
+                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createModal">添加用户</button>
+                                        </form>
+                                    </p>
+                                    <table class="table table-striped dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>用户ID</th><th>用户名</th><th>真实姓名</th><th width="200px">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for user in page.pageList %}
+                                            <tr>
+                                                <td>
+                                                    {{ user.userId }}
+                                                </td>
+                                                <td>
+                                                    {{ user.userName }}
+                                                </td>
+                                                <td>
+                                                    {{ user.realName }}
+                                                </td>
+                                                <td>
+                                                    <button onclick="removeUser({{ user.userId }})" class="btn btn-danger btn-sm">删除</button>
+                                                    <button onclick="updateUser({{ user.userId }}, '{{ user.userName }}', '{{ user.realName }}')"
+                                                            data-toggle="modal" data-target="#updateModal" class="btn btn-info btn-sm">
+                                                        修改
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                        <tfoot>
+                                            <tr align="right">
+                                               <td colspan="10" align="right">
+                                                   总共有{{ page.count }}条，总共有{{ page.totalPage }}页，当前为第{{ page.currentPage }}页
+                                                   <button class="btn btn-outline-success" onclick="changePage('first', {{ page.currentPage }}, {{ page.pageSize }}, {{page.totalPage}})">首页</button>
+                                                   <button class="btn btn-outline-success" onclick="changePage('pre', {{ page.currentPage }}, {{ page.pageSize }}, {{page.totalPage}})">上一页</button>
+                                                   <button class="btn btn-outline-success" onclick="changePage('next', {{ page.currentPage }}, {{ page.pageSize }}, {{page.totalPage}})">下一页</button>
+                                                   <button class="btn btn-outline-success" onclick="changePage('last', {{ page.currentPage }}, {{ page.pageSize }}, {{page.totalPage}})">尾页</button>
+                                               </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2020 © Opatix.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Design & Develop by Myra
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/js/metismenu.min.js"></script>
+    <script src="/static/assets/js/waves.js"></script>
+    <script src="/static/assets/js/simplebar.min.js"></script>
+
+
+    <!-- Morris Custom Js-->
+    <script src="/static/assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="/static/assets/js/theme.js"></script>
+
+    <!-- Modal -->
+    <!-- Update Modal -->
+    <div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">修改用户信息</h5>
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-horizontal" action="/userlist" method="post" name="updateForm">
+                    <div class="modal-body">
+                        <div class="form-group row mb-3">
+                            <label for="inputEmail3" class="col-3 col-form-label">用户名：</label>
+                            <div class="col-9">
+                                <input type="text" name="userName" readonly="readonly" class="form-control" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-3 col-form-label">真实姓名：</label>
+                            <div class="col-9">
+                                <input type="text" name="realName" class="form-control" placeholder="真实姓名">
+                            </div>
+                        </div>
+                        <input type="hidden" name="userId">
+                        <input type="hidden" name="opr" value="update">
+                        <input type="hidden" name="searchName" value="{{ search.userName }}">
+                        <input type="hidden" name="currentPage" value="{{ page.currentPage }}">
+                        <input type="hidden" name="pageSize" value="{{ page.pageSize }}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Create Modal -->
+    <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">添加用户</h5>
+                    <button type="button" class="close waves-effect waves-light" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="form-horizontal" action="/userlist" method="post" name="createForm">
+                    <div class="modal-body">
+                        <div class="form-group row mb-3">
+                            <label for="inputEmail3" class="col-3 col-form-label">用户名：</label>
+                            <div class="col-9">
+                                <input type="text" name="searchName" class="form-control" placeholder="用户名">
+                            </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-3 col-form-label">密码：</label>
+                            <div class="col-9">
+                                <input type="text" name="userPwd" class="form-control" placeholder="密码">
+                            </div>
+                        </div>
+                        <div class="form-group row mb-3">
+                            <label for="inputPassword3" class="col-3 col-form-label">真实姓名：</label>
+                            <div class="col-9">
+                                <input type="text" name="realName" class="form-control" placeholder="真实姓名">
+                            </div>
+                        </div>
+                        <input type="hidden" name="opr" value="create">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">关闭</button>
+                        <button type="submit" class="btn btn-primary waves-effect waves-light">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

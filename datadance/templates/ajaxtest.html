@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        function ajaxTest(){
+            // $代表jQuery对象
+            //
+            jsonObj = {name: 'zhangsan', age: 30}
+            console.log(jsonObj.name)
+            $.ajax({
+                url: '/getjobsalarybytype',
+                method: 'post',
+                data: {
+
+                },
+                dataType: 'json',
+                success: function (data){
+                    console.log(JSON.stringify(data))
+                },
+                error: function (xhr){
+
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+    <button onclick="ajaxTest()">点我发送异步AJAX请求</button>
+</body>
+</html>
