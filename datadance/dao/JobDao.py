@@ -38,7 +38,7 @@ class JobDao(BaseDao):
 
     # 分页查询方法
     def getJobPageList(self, search={}, page={}):
-        # search={'searchName':'北京', 'searchType': 'jobCity'}
+        # search={'searchName':"机械", 'searchType': "机械学习", 'jobCity':"北京"}
         # page={'currentPage':1, 'pageSize':10}
         sql = "select * from t_jobdata where 1=1"  # where 1=1 便于添加and
         params = []
