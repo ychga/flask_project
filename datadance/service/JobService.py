@@ -33,6 +33,16 @@ class JobService:
             count = jobDao.getTotalCount(search)
         finally:
             jobDao.close()
+   
+    def addJob(self, data={}):
+        jobDao = JobDao()
+        try:
+            result = jobDao.addJob()
+            print("ok")
+        finally:
+            jobDao.close()
+        return result
+
         return pageList, count
 
     def updateJob(self, data={}):
