@@ -33,25 +33,6 @@ def getJobCountByJobCity():
 def getJobSalaryAndCity():
     jobService = JobService()
     data = jobService.getJobSalaryAndCity()
-
-#add
-@jobController.route('/add', methods=['post', 'get'])
-def add():
-
-
-    jobService = JobService()
-    jobService.addJob()
-
-    page = {'currentPage': 1 if not request.form.get('currentPage') else int(request.form.get('currentPage')),
-            'pageSize': 10 if not request.form.get('pageSize') else int(request.form.get('pageSize'))}
-
-    page['startRow'] = (page.get('currentPage') - 1) * page.get('pageSize')
-
-    search = {'searchName': request.form.get('searchName'),
-              'searchType': request.form.get('searchType')}
-
-    return render_template('joblist.html', page=1, search=search)
-
     return json.dumps(data, ensure_ascii=False)
 
 
