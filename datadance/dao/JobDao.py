@@ -1,5 +1,6 @@
 from dao.BaseDao import BaseDao
-import  xlrd
+import xlrd
+
 
 class JobDao(BaseDao):
     def createJobData(self, sql, params):
@@ -61,7 +62,7 @@ class JobDao(BaseDao):
                 sql += " and jobAddress like %s"
                 params.append("%" + search.get('jobAddress') + "%")
                 pass
-            if search.get('jobOrder'): # jobOrder不存在或为0时，以默认的id升序排序；为1时，按平均薪资降序排序；为2时，按平均薪资升序排序
+            if search.get('jobOrder'):  # jobOrder不存在或为0时，以默认的id升序排序；为1时，按平均薪资降序排序；为2时，按平均薪资升序排序
                 if search.get('jobOrder') == 1:
                     sql += " order by jobMeanSalary desc"
                     pass
@@ -69,7 +70,6 @@ class JobDao(BaseDao):
                     sql += " order by jobMeanSalary asc"
                     pass
                 pass
-
 
         print(sql)
         print(params)
@@ -171,10 +171,11 @@ class JobDao(BaseDao):
         self.execute(sql, [id])
         sjobList = self.fetchall()
         return job, sjobList
-     #添加job数据，目前添加了工作名称 工作薪水 地址 公司名 要求 使用 xlsx导入 数据导出时需要按照下面的添加顺序导出，也可以更改下面的sql语句更改顺序和导入数据数量
-    def addJob(self,data={}):
-        path="t_jobdata.xlsx"
-        #path = r'D:\t_jobdata.xlsx'
+
+    # 添加job数据，目前添加了工作名称 工作薪水 地址 公司名 要求 使用 xlsx导入 数据导出时需要按照下面的添加顺序导出，也可以更改下面的sql语句更改顺序和导入数据数量
+    def addJob(self, data={}):
+        path = "t_jobdata.xlsx"
+        # path = r'D:\t_jobdata.xlsx'
         #  data = pd.read_csv(path, encoding='utf-8')
         #   con=self.getConnection(self)
         wkb = xlrd.open_workbook(path)
@@ -189,16 +190,15 @@ class JobDao(BaseDao):
             cap.append(x)
         #     c = self.fetchone(self):#con.cursor()
         for msg in cap:
-            name= msg[0]
+            name = msg[0]
             sal = msg[1]
             add = msg[2]
             com = msg[3]
-            req = msg[4]
+            detail = msg[4]
             # 使用f-string格式化字符串，对sql进行赋值
             sql = (
-                "insert into t_jobdata(jobName, jobSalary, jobAddress, jobCompany, jobRequest) value(%s,%s,%s,%s,%s)")
-            result = self.execute(sql,[name,sal,add,com,req])
+                "insert into t_jobdata(jobName, jobSalary, jobAddress, jobCompany, jobDetail) value(%s,%s,%s,%s,%s)")
+            result = self.execute(sql, [name, sal, add, com, detail])
         self.commit()
         print("插入数据完成！")
         return result
-
