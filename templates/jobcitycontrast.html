@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>职位地区比例图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+     <!-- App favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
+
+     <!-- App css -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <!-- ========== Left Sidebar Start ========== -->
+        {% include 'leftbar.html'%}
+        <!-- Left Sidebar End -->
+
+        {% include 'header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">首页</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">系统平台</a></li>
+                                        <li class="breadcrumb-item active">首页</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-layer m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <h6 class="text-muted text-uppercase mt-0">Project Income</h6>
+                                    <h3 class="my-3">$4,514</h3>
+                                    <span class="badge badge-soft-primary mr-1"> +11% </span> <span class="text-muted">From previous period</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-dollar-circle m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <h6 class="text-muted text-uppercase mt-0">Net Revenue</h6>
+                                    <h3 class="my-3">$85,365</h3>
+                                    <span class="badge badge-soft-primary mr-1"> -29% </span> <span class="text-muted">This Month</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-analyse m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <h6 class="text-muted text-uppercase mt-0">New Leads</h6>
+                                    <h3 class="my-3">$<span data-plugin="counterup">9.94</span></h3>
+                                    <span class="badge badge-soft-primary mr-1"> 0% </span> <span class="text-muted">This Month</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-basket m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <h6 class="text-muted text-uppercase mt-0">Quoted </h6>
+                                    <h3 class="my-3" data-plugin="counterup">5,842</h3>
+                                    <span class="badge badge-soft-primary mr-1"> +89% </span> <span class="text-muted">This Month</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+
+<div class="row">
+                        <div class="col-lg-12">
+                             <div class="card card-animate">
+                                <div class="card-body">
+                                    <h4 class="card-title d-inline-block">职位地区比例图</h4>
+
+                                    <div id="jobAR" class="morris-chart" style="height: 350px;"></div>
+
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+
+                    </div>
+                    <!-- end row-->
+                    <!-- end row-->
+                    </div>
+                    <!-- end row-->
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2020 © Opatix.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Design & Develop by Myra
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/js/metismenu.min.js"></script>
+    <script src="/static/assets/js/waves.js"></script>
+    <script src="/static/assets/js/simplebar.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="/static/assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="/static/assets/js/theme.js"></script>
+    <script src="/static/assets/js/echarts.min.js"></script>
+    <script src="/static/assets/js/china.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url: '/getjobcountbycity',
+            method: 'post',
+            data: {
+
+            },
+            dataType: 'json',
+            success: function (data){
+                pieData = []
+                for(i = 0; i < data.length; i++){
+                    jsonData = {value: data[i].jobCount, name: data[i].jobCity}
+                    pieData[i] = jsonData
+                }
+
+                var chartDom = document.getElementById('jobAR');
+                var myChart = echarts.init(chartDom);
+                var option;
+
+                option = {
+                  backgroundColor: '#2c343c',
+                  tooltip: {
+                    trigger: 'item'
+                  },
+                  visualMap: {
+                    show: true,
+                    min: 80,
+                    max: 600,
+                    inRange: {
+                      colorLightness: [0.15, 0.5]
+                    }
+                  },
+                  series: [
+                    {
+                      name: 'Access From',
+                      type: 'pie',
+                      radius: '80%',
+                      center: ['50%', '50%'],
+                      data: pieData,
+                      roseType: 'radius',
+                      label: {
+                        color: 'rgba(255, 255, 255, 0.3)'
+                      },
+                      labelLine: {
+                        lineStyle: {
+                          color: 'rgba(255, 255, 255, 0.3)'
+                        },
+                        smooth: 0.2,
+                        length: 10,
+                        length2: 20
+                      },
+                      itemStyle: {
+                        color: '#c23531',
+                        shadowBlur: 200,
+                        shadowColor: 'rgba(0, 100, 0, 0.5)'
+                      },
+                      animationType: 'scale',
+                      animationEasing: 'elasticOut',
+                      animationDelay: function (idx) {
+                        return Math.random() * 200;
+                      }
+                    }
+                  ]
+                };
+
+                option && myChart.setOption(option);
+            },
+            error: function (xhr){
+
+            }
+        })
+    </script>
+<script src="/static/assets/js/area_echarts.js"></script>
+
+</body>
+</html>

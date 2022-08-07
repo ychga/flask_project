@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>职位详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
+
+    <!-- Plugins css -->
+
+
+    <!-- App css -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+
+    </script>
+
+</head>
+
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <!-- ========== Left Sidebar Start ========== -->
+        {% include 'leftbar.html' %}
+        <!-- Left Sidebar End -->
+
+        {% include 'header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">系统管理</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item">系统管理</li>
+                                        <li class="breadcrumb-item active">职位详情</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+                <div class="row">
+                        <div class="col-lg-12">
+                             <div class="card card-animate">
+                                <div class="card-body">
+                                    <h4 class="card-title d-inline-block">职位：
+                                        <br>{{ job.jobName }}<br>{{ job.jobAddress }}<br>{{ job.jobSalary }}<br>{{ job.jobCompany }}</h4>
+
+                                    <div id="jobMap" class="morris-chart" style="height: 320px;">
+                                        职位要求：<br>
+                                        {{ job.jobDetail }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+
+                    </div>
+                    <!-- end row-->
+
+
+                    <div class="row">
+                        <div class="col-12">
+                             <div class="card">
+                                <div class="card-body">
+                                    <p class="card-subtitle mb-4">
+                                        相关职位
+                                    </p>
+                                    <table class="table table-striped dt-responsive nowrap">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>名称</th>
+                                                <th>薪资</th>
+                                                <th>地址</th>
+                                                <th>公司名</th>
+                                                <th>类型</th>
+                                                <th width="200px">操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for job in sjobList %}
+                                            <tr>
+                                                <td>
+                                                    {{ job.jobId }}
+                                                </td>
+                                                <td>
+                                                    {{ job.jobName }}
+                                                </td>
+                                                <td>
+                                                    {{ job.jobSalary }}
+                                                </td>
+                                                <td>
+                                                    {{ job.jobAddress }}
+                                                </td>
+                                                <td>
+                                                    {{ job.jobCompany }}
+                                                </td>
+                                                <td>
+                                                    {{ job.jobType }}
+                                                </td>
+                                                <td>
+
+                                                    <button class="btn btn-info btn-sm">详情</button>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+
+                                    </table>
+                                </div> <!-- end card body-->
+                            </div> <!-- end card -->
+                        </div><!-- end col-->
+                    </div>
+                    <!-- end row-->
+
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2020 © Opatix.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Design & Develop by Myra
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/js/metismenu.min.js"></script>
+    <script src="/static/assets/js/waves.js"></script>
+    <script src="/static/assets/js/simplebar.min.js"></script>
+
+
+    <!-- Morris Custom Js-->
+    <script src="/static/assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="/static/assets/js/theme.js"></script>
+
+
+
+</body>
+
+</html>
