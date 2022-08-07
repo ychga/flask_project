@@ -52,8 +52,11 @@ def jobList():
 
     page['startRow'] = (page.get('currentPage') - 1) * page.get('pageSize')
 
-    search = {'searchName': request.form.get('searchName'),
-              'searchType': request.form.get('searchType')}
+    search = {'jobId': request.form.get('search_jobId'),
+              'jobName': request.form.get('search_jobName'),
+              'jobType': request.form.get('search_jobType'),
+              'jobCompany': request.form.get('search_jobCompany'),
+              'jobAddress': request.form.get('search_jobAddress')}
     print(search)
 
     jobService = JobService()
@@ -72,7 +75,8 @@ def jobList():
         result = jobService.removeJob(jobId)
 
     joblist, count = jobService.getJobPageList(search, page)
-
+    print(joblist)
+    print(count)
     page['jobList'] = joblist
     page['count'] = count['counts']
     page['totalPage'] = count['counts'] // page.get('pageSize') if count['counts'] % page.get('pageSize') == 0 \

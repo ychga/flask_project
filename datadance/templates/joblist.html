@@ -20,7 +20,7 @@
     <link href="/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <link href="/static/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript">
-        function changePage(opr, currentPage, pageSize, totalPage, searchType, searchName){
+        function changePage(opr, currentPage, pageSize, totalPage, search_jobName,search_jobType,search_jobCompany,search_jobAddress){
             if(opr == "first"){
                 if(currentPage == 1)
                     return
@@ -39,33 +39,15 @@
                 currentPage = totalPage
             }
 
-            if(searchType == "jobName"){
-                document.searchForm1.currentPage.value = currentPage
-                document.searchForm1.pageSize.value = pageSize
-                document.searchForm1.searchName.value = searchName
-                document.searchForm1.submit()
-            }else if(searchType == "jobType"){
-                document.searchForm2.currentPage.value = currentPage
-                document.searchForm2.pageSize.value = pageSize
-                document.searchForm2.searchName.value = searchName
-                document.searchForm2.submit()
-            }else if(searchType == "jobCompany"){
-                document.searchForm3.currentPage.value = currentPage
-                document.searchForm3.pageSize.value = pageSize
-                document.searchForm3.searchName.value = searchName
-                document.searchForm3.submit()
-            }else if(searchType == "jobAddress"){
-                document.searchForm4.currentPage.value = currentPage
-                document.searchForm4.pageSize.value = pageSize
-                document.searchForm4.searchName.value = searchName
-                document.searchForm4.submit()
-            }else{
-                document.searchForm1.currentPage.value = currentPage
-                document.searchForm1.pageSize.value = pageSize
-                document.searchForm1.searchType.value = null
-                document.searchForm1.searchName.value = null
-                document.searchForm1.submit()
-            }
+
+            document.searchForm1.currentPage.value = currentPage
+            document.searchForm1.pageSize.value = pageSize
+            document.searchForm1.search_jobName.value = search_jobName
+            document.searchForm1.search_jobType.value = search_jobType
+            document.searchForm1.search_jobCompany.value = search_jobCompany
+            document.searchForm1.search_jobAddress.value = search_jobAddress
+            document.searchForm1.submit()
+
         }
         function removeJob(jobId, jobName, jobSalary, jobAddress, jobCompany, jobType){
             document.deleteForm.jobId.value = jobId
@@ -137,57 +119,32 @@
                                 <div class="card-body">
                                     <table>
                                         <tr>
-                                            <td>
-                                        <form action="/joblist" method="post" name="searchForm1" class="form-inline">
-                                            <b>工作名：</b>
-                                            <input type="text" name="searchName" class="form-control col-sm">
-                                            <input type="hidden" name="searchType" value="jobName">
-                                            <input type="hidden" name="currentPage" value="1">
-                                            <input type="hidden" name="pageSize" value="{{ page.pageSize }}">&nbsp
-                                            <button type="submit" class="btn btn-primary" style="font-weight: bold">查询</button>&nbsp
-                                        </form>
                                             </td>
-                                            <td>
-                                        <form action="/joblist" method="post" name="searchForm2" class="form-inline">
-                                            <b>类型名：</b>
-                                            <input type="text" name="searchName" class="form-control col-sm">
-                                            <input type="hidden" name="searchType" value="jobType">
-                                            <input type="hidden" name="currentPage" value="1">
-                                            <input type="hidden" name="pageSize" value="{{ page.pageSize }}">&nbsp
-                                            <button type="submit" class="btn btn-primary" style="font-weight: bold">查询</button>&nbsp
-                                        </form>
-                                            </td>
-                                            <td>
-                                        <form action="/joblist" method="post" name="searchForm3" class="form-inline">
-                                            <b>公司名：</b>
-                                            <input type="text" name="searchName" class="form-control col-sm">
-                                            <input type="hidden" name="searchType" value="jobCompany">
-                                            <input type="hidden" name="currentPage" value="1">
-                                            <input type="hidden" name="pageSize" value="{{ page.pageSize }}">&nbsp
-                                            <button type="submit" class="btn btn-primary" style="font-weight: bold">查询</button>&nbsp
-                                        </form>
-                                            </td>
-                                            <td>
-                                        <form action="/joblist" method="post" name="searchForm4" class="form-inline">
-                                            <b>地名：</b>
-                                            <input type="text" name="searchName" class="form-control col-sm">
-                                            <input type="hidden" name="searchType" value="jobAddress">
-                                            <input type="hidden" name="currentPage" value="1">
-                                            <input type="hidden" name="pageSize" value="{{ page.pageSize }}">&nbsp
-                                            <button type="submit" class="btn btn-primary" style="font-weight: bold">查询</button>&nbsp
-                                        </form>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td>
                                                 <button type="button" class="btn btn-primary"
-                                                onclick="scrapy()">采集职位详情信息</button>&nbsp
+                                                onclick="scrapy()">采集职位详情信息</button>
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary"
                                                 onclick="similarJob()">职位相似度分析</button>
                                             </td>
+                                            <td>
+                                        <form action="/joblist" method="post" name="searchForm1" class="form-inline">
+                                            <b>工作名：</b>
+                                            <input type="text" name="search_jobName" class="form-control col-sm">&nbsp
+                                            <b>类型名：</b>
+                                            <input type="text" name="search_jobType" class="form-control col-sm">&nbsp
+                                            <b>公司名：</b>
+                                            <input type="text" name="search_jobCompany" class="form-control col-sm">&nbsp
+                                            <b>地名：</b>
+                                            <input type="text" name="search_jobAddress" class="form-control col-sm">&nbsp
+                                            <input type="hidden" name="currentPage" value="1">
+                                            <input type="hidden" name="pageSize" value="{{ page.pageSize }}">&nbsp
+                                            <button type="submit" class="btn btn-primary" style="font-weight: bold">查询</button>&nbsp
+                                        </form>
 
+                                        </tr>
+                                        <tr>
                                         </tr>
                                     </table>
                                     <table class="table table-striped dt-responsive nowrap">
@@ -257,29 +214,37 @@
                                                                    {{ page.currentPage }},
                                                                    {{ page.pageSize }},
                                                                    {{ page.totalPage }},
-                                                                   '{{ search.searchType }}',
-                                                                   '{{ search.searchName }}')">首页</button>
+                                                                   '{{ search.jobName }}',
+                                                                   '{{ search.jobType }}',
+                                                                   '{{ search.jobCompany }}',
+                                                                   '{{ search.jobAddress }}')">首页</button>
                                                    <button class="btn btn-outline-success"
                                                            onclick="changePage('pre',
                                                                    {{ page.currentPage }},
                                                                    {{ page.pageSize }},
                                                                    {{ page.totalPage }},
-                                                                   '{{ search.searchType }}',
-                                                                   '{{ search.searchName }}')">上一页</button>
+                                                                   '{{ search.jobName }}',
+                                                                   '{{ search.jobType }}',
+                                                                   '{{ search.jobCompany }}',
+                                                                   '{{ search.jobAddress }}')">上一页</button>
                                                    <button class="btn btn-outline-success"
                                                            onclick="changePage('next',
                                                                    {{ page.currentPage }},
                                                                    {{ page.pageSize }},
                                                                    {{ page.totalPage }},
-                                                                   '{{ search.searchType }}',
-                                                                   '{{ search.searchName }}')">下一页</button>
+                                                                   '{{ search.jobName }}',
+                                                                   '{{ search.jobType }}',
+                                                                   '{{ search.jobCompany }}',
+                                                                   '{{ search.jobAddress }}')">下一页</button>
                                                    <button class="btn btn-outline-success"
                                                            onclick="changePage('last',
                                                                    {{ page.currentPage }},
                                                                    {{ page.pageSize }},
                                                                    {{ page.totalPage }},
-                                                                   '{{ search.searchType }}',
-                                                                   '{{ search.searchName }}')">尾页</button>
+                                                                   '{{ search.jobName }}',
+                                                                   '{{ search.jobType }}',
+                                                                   '{{ search.jobCompany }}',
+                                                                   '{{ search.jobAddress }}')">尾页</button>
                                                </td>
                                             </tr>
                                         </tfoot>

@@ -38,10 +38,27 @@ class JobDao(BaseDao):
 
     # 分页查询方法
     def getJobPageList(self, search={}, page={}):
-        # search={'searchName':"机械", 'searchType': "机械学习", 'jobCity':"北京"}
+        # search={'jobName':"机械", 'jobType': "机械学习",'jobCompany':"公司", 'jobCity':"北京"}
         # page={'currentPage':1, 'pageSize':10}
         sql = "select * from t_jobdata where 1=1"  # where 1=1 便于添加and
         params = []
+        if search.get('jobName'):
+            sql += " and jobName like %s"
+            params.append("%" + search.get('jobName') + "%")
+            pass
+        if search.get('jobType'):
+            sql += " and jobType like %s"
+            params.append("%" + search.get('jobType') + "%")
+            pass
+        if search.get('jobCompany'):
+            sql += " and jobCompany like %s"
+            params.append("%" + search.get('jobCompany') + "%")
+            pass
+        if search.get('jobAddress'):
+            sql += " and jobAddress like %s"
+            params.append("%" + search.get('jobAddress') + "%")
+            pass
+        """
         if search.get('searchType'):
             if search.get('searchType') == 'jobId':
                 sql += " and {0} = %s".format(search.get('searchType'))
@@ -49,6 +66,7 @@ class JobDao(BaseDao):
             else:
                 sql += " and {0} like %s".format(search.get('searchType'))
                 params.append("%" + search.get('searchName') + "%")
+        """
         print(sql)
         print(params)
 
