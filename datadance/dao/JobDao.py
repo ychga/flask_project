@@ -171,3 +171,34 @@ class JobDao(BaseDao):
         self.execute(sql, [id])
         sjobList = self.fetchall()
         return job, sjobList
+     #添加job数据，目前添加了工作名称 工作薪水 地址 公司名 要求 使用 xlsx导入 数据导出时需要按照下面的添加顺序导出，也可以更改下面的sql语句更改顺序和导入数据数量
+    def addJob(self,data={}):
+        path="t_jobdata.xlsx"
+        #path = r'D:\t_jobdata.xlsx'
+        #  data = pd.read_csv(path, encoding='utf-8')
+        #   con=self.getConnection(self)
+        wkb = xlrd.open_workbook(path)
+        # 2.获取sheet
+        sheet = wkb.sheet_by_index(0)  # 获取第一个sheet表['job']
+        # 3.获取总行数
+        rows_number = sheet.nrows
+        # 4.遍历sheet表中所有行的数据，并保存至一个空列表cap[]
+        cap = []
+        for i in range(rows_number):
+            x = sheet.row_values(i)  # 获取第i行的值（从0开始算起）
+            cap.append(x)
+        #     c = self.fetchone(self):#con.cursor()
+        for msg in cap:
+            name= msg[0]
+            sal = msg[1]
+            add = msg[2]
+            com = msg[3]
+            req = msg[4]
+            # 使用f-string格式化字符串，对sql进行赋值
+            sql = (
+                "insert into t_jobdata(jobName, jobSalary, jobAddress, jobCompany, jobRequest) value(%s,%s,%s,%s,%s)")
+            result = self.execute(sql,[name,sal,add,com,req])
+        self.commit()
+        print("插入数据完成！")
+        return result
+
