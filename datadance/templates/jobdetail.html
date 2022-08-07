@@ -107,7 +107,7 @@
                                                     {{ job.jobId }}
                                                 </td>
                                                 <td>
-                                                    {{ job.jobName }}
+                                                    <a href="/jobdetail?jobId={{ job.jobId }}">{{ job.jobName }}</a>
                                                 </td>
                                                 <td>
                                                     {{ job.jobSalary }}
@@ -122,9 +122,9 @@
                                                     {{ job.jobType }}
                                                 </td>
                                                 <td>
-
+                                                    <a href="/jobdetail?jobId={{ job.jobId }}">
                                                     <button class="btn btn-info btn-sm">详情</button>
-
+                                                    </a>
                                                 </td>
                                             </tr>
                                         {% endfor %}
