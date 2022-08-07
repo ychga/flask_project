@@ -33,7 +33,8 @@ class JobService:
             count = jobDao.getTotalCount(search)
         finally:
             jobDao.close()
-   
+
+        return pageList, count
     def addJob(self, data={}):
         jobDao = JobDao()
         try:
@@ -43,7 +44,7 @@ class JobService:
             jobDao.close()
         return result
 
-        return pageList, count
+
 
     def updateJob(self, data={}):
         jobDao = JobDao()
