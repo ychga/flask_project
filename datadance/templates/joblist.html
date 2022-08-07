@@ -118,20 +118,21 @@
                                 <div class="card-body">
                                     <table>
                                         <tr>
-                                            <form action="/add" method="post">
+                                            <form action="/add" method="post" class="form-inline">
                                             <td>
-                                            <button data-toggle="modal"onclick="addJob()" class="btn btn-primary" data-target="#addModal">
-                                                        导入</button>
+                                                 <input type="hidden" name="currentPage" value="1">
+                                                 <input type="hidden" name="pageSize" value="{{ page.pageSize }}">
+                                                 <button data-toggle="modal"onclick="addJob()" class="btn btn-primary" data-target="#addModal">外部导入</button>
                                             </td>
                                             </form>
                                             <td>
-                                                <button type="button" class="btn btn-primary"
+                                                <button type="button" class="btn btn-dark" disabled="disabled"
                                                 onclick="scrapy()">采集职位详情信息</button>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-primary"
+                                                <button type="button" class="btn btn-dark" disabled="disabled"
                                                 onclick="similarJob()">职位相似度分析</button>
-                                            </td>&nbsp
+                                            </td>
                                             <td>
                                         <form action="/joblist" method="post" name="searchForm1" class="form-inline">
                                             <b>名称：</b>
@@ -152,6 +153,7 @@
                                             <td/>
                                             <td/>
                                             <td/>
+                                            <td/>
                                         <form action="/joblist" method="post" name="searchForm2" class="form-inline">
                                             <b>ID号查询：</b>
                                             <input type="text" name="search_jobId" class="form-control col-sm">
@@ -161,7 +163,7 @@
                                         </form>
                                             </td>
                                         </tr>
-                                    </table>
+                                    </table>&nbsp
                                     <table class="table table-striped dt-responsive nowrap">
                                         <thead>
                                             <tr>
@@ -216,9 +218,10 @@
                                                             '{{ job.jobCompany }}',
                                                             '{{ job.jobType }}')"
                                                             data-toggle="modal" data-target="#updateModal"
-                                                            class="btn btn-info btn-sm">修改</button>
+                                                            class="btn btn-warning btn-sm">修改</button>
+                                                    <a href="/jobdetail?jobId={{ job.jobId }}">
                                                     <button class="btn btn-info btn-sm">详情</button>
-
+                                                    </a>
                                                 </td>
                                             </tr>
                                         {% endfor %}

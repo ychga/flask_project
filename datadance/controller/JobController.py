@@ -84,10 +84,13 @@ def jobList():
         result = jobService.removeJob(jobId)
 
     joblist, count = jobService.getJobPageList(search, page)
-    print(joblist)
-    print(count)
     page['jobList'] = joblist
     page['count'] = count['counts']
+    if page['count'] == 0 or page['jobList'] is None:
+        search = {}
+        joblist, count = jobService.getJobPageList(search, page)
+        page['jobList'] = joblist
+        page['count'] = count['counts']
     page['totalPage'] = count['counts'] // page.get('pageSize') if count['counts'] % page.get('pageSize') == 0 \
         else (count['counts'] // page.get('pageSize') + 1)
 
@@ -202,10 +205,14 @@ def add():
 
     page = {'currentPage': 1 if not request.form.get('currentPage') else int(request.form.get('currentPage')),
             'pageSize': 10 if not request.form.get('pageSize') else int(request.form.get('pageSize'))}
-
     page['startRow'] = (page.get('currentPage') - 1) * page.get('pageSize')
+    search = {}
 
-    search = {'searchName': request.form.get('searchName'),
-              'searchType': request.form.get('searchType')}
+    joblist, count = jobService.getJobPageList(search, page)
+    page['jobList'] = joblist
+    page['count'] = count['counts']
+    page['totalPage'] = count['counts'] // page.get('pageSize') if count['counts'] % page.get('pageSize') == 0 \
+        else (count['counts'] // page.get('pageSize') + 1)
 
-    return render_template('joblist.html', page=1, search=search)
+    return render_template('joblist.html', page=page, search=search)
+
