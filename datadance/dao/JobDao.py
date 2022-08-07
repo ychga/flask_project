@@ -42,6 +42,7 @@ class JobDao(BaseDao):
     def getJobPageList(self, search={}, page={}):
         sql = "select * from t_jobdata where 1=1"  # where 1=1 便于添加and
         params = []
+        # 根据传入search中的字段存在与否，增加对应的sql限制
         if search.get('jobId'):
             sql += " and jobId = %s"
             params.append(search.get('jobId'))
