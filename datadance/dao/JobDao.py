@@ -190,15 +190,17 @@ class JobDao(BaseDao):
             cap.append(x)
         #     c = self.fetchone(self):#con.cursor()
         for msg in cap:
-            name = msg[0]
-            sal = msg[1]
-            add = msg[2]
-            com = msg[3]
-            detail = msg[4]
+            name = msg[0]  # A
+            sal = msg[1]  # B
+            add = msg[2]  # C
+            com = msg[3]  # D
+            detail = msg[4]  # E
+            link = msg[5]  # F
+            type = msg[7]  # H
             # 使用f-string格式化字符串，对sql进行赋值
             sql = (
-                "insert into t_jobdata(jobName, jobSalary, jobAddress, jobCompany, jobDetail) value(%s,%s,%s,%s,%s)")
-            result = self.execute(sql, [name, sal, add, com, detail])
+                "insert into t_jobdata(jobName, jobSalary, jobAddress, jobCompany,jobLink,jobType, jobDetail) value(%s,%s,%s,%s,%s,%s,%s)")
+            result = self.execute(sql, [name, sal, add, com,link,type, detail])
         self.commit()
         print("插入数据完成！")
         return result
