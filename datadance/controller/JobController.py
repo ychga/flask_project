@@ -216,3 +216,32 @@ def add():
 
     return render_template('joblist.html', page=page, search=search)
 
+@jobController.route('/getjobsalarybyjobcity', methods=['post', 'get'])
+def getjobSalaryByJobCity():
+    jobService = JobService()
+    data = jobService.getJobSalaryStatisticByJobCity()
+    return json.dumps(data, ensure_ascii=False)
+
+@jobController.route('/jobsalarybyjobcity', methods=['post', 'get'])
+def jobSalaryByJobCityPage():
+    return render_template('jobsalarybyjobcity.html')
+
+@jobController.route('/jobsalarybyjobtype', methods=['post', 'get'])
+def jobSalaryByJobTypePage():
+    return render_template('jobsalarybyjobtype.html')
+
+@jobController.route('/jobcountbyjobtype', methods=['post', 'get'])
+def jobCountByJobTypePage():
+    return render_template('jobcountbyjobtype.html')
+
+@jobController.route('/jobcountbyjobcity', methods=['post', 'get'])
+def jobCountByJobCityPage():
+    return render_template('jobcountbyjobcity.html')
+
+@jobController.route('/jobcitycontrast', methods=['post', 'get'])
+def jobCityContrastPage():
+    return render_template('jobcitycontrast.html')
+
+@jobController.route('/jobcityandjobtype', methods=['post', 'get'])
+def jobCityAndJobTypePage():
+    return render_template('jobcityandjobtype.html')

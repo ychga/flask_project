@@ -110,3 +110,19 @@ class JobService:
             jobDao.close()
         return job, sjobList
 
+    def getJobSalaryStatisticByJobCity(self):
+        jobDao = JobDao()
+        try:
+            data = jobDao.getJobSalaryStatisticByJobCity()
+        finally:
+            jobDao.close()
+        return data
+
+    # 和上面的getJobCountByJobCity(self)重复了
+    def getJobCountStatisticByJobCity(self):
+        jobDao = JobDao()
+        try:
+            data = jobDao.getJobCountStatisticByJobCity()
+        finally:
+            jobDao.close()
+        return data
