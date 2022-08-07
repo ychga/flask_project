@@ -172,7 +172,7 @@ class JobDao(BaseDao):
         sjobList = self.fetchall()
         return job, sjobList
 
-    # 添加job数据，目前添加了工作名称 工作薪水 地址 公司名 要求 使用 xlsx导入 数据导出时需要按照下面的添加顺序导出，也可以更改下面的sql语句更改顺序和导入数据数量
+    # 添加job数据，目前添加了工作名称 工作薪水 地址 公司名 要求 链接 类型。使用 xlsx导入 数据导出时需要按照下面的添加顺序导出，也可以更改下面的sql语句更改顺序和导入数据数量
     def addJob(self, data={}):
         path = "t_jobdata.xlsx"
         # path = r'D:\t_jobdata.xlsx'

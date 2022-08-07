@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>不同城市职业薪资对比图</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+    <meta content="MyraStudio" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+     <!-- App favicon -->
+    <link rel="shortcut icon" href="/static/assets/images/favicon.ico">
+
+     <!-- App css -->
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/assets/css/theme.min.css" rel="stylesheet" type="text/css" />
+
+</head>
+<body>
+
+    <!-- Begin page -->
+    <div id="layout-wrapper">
+
+        <!-- ========== Left Sidebar Start ========== -->
+        {% include 'leftbar.html'%}
+        <!-- Left Sidebar End -->
+
+        {% include 'header.html' %}
+
+        <!-- ============================================================== -->
+        <!-- Start right Content here -->
+        <!-- ============================================================== -->
+        <div class="main-content">
+
+            <div class="page-content">
+                <div class="container-fluid">
+
+                    <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-flex align-items-center justify-content-between">
+                                <h4 class="mb-0 font-size-18">首页</h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);">系统平台</a></li>
+                                        <li class="breadcrumb-item active">首页</li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-layer m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <h6 class="text-muted text-uppercase mt-0">项目收入情况</h6>
+                                    <h3 class="my-3">¥58,328</h3>
+                                    <span class="badge badge-soft-primary mr-1"> +18% </span> <span class="text-muted">与上期相比</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-dollar-circle m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <h6 class="text-muted text-uppercase mt-0">净收入</h6>
+                                    <h3 class="my-3">¥785,365</h3>
+                                    <span class="badge badge-soft-primary mr-1"> +30% </span> <span class="text-muted">本月</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-analyse m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <h6 class="text-muted text-uppercase mt-0">新潜在客户量</h6>
+                                    <h3 class="my-3"><span data-plugin="counterup">10.94%</span></h3>
+                                    <span class="badge badge-soft-primary mr-1"> +12% </span> <span class="text-muted">本月</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="avatar-sm float-right">
+                                        <span class="avatar-title bg-soft-primary rounded-circle">
+                                            <i class="bx bx-basket m-0 h3 text-primary"></i>
+                                        </span>
+                                    </div>
+                                     <h6 class="text-muted text-uppercase mt-0">引用量</h6>
+                                    <h3 class="my-3" data-plugin="counterup">15,842</h3>
+                                    <span class="badge badge-soft-primary mr-1"> +189% </span> <span class="text-muted">本月</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+
+
+                    <div class="row">
+                        <div class="col-lg">
+                             <div class="card card-animate">
+                                <div class="card-body">
+                                    <h4 class="card-title d-inline-block">不同城市职业薪资对比图</h4>
+                                    <div id="jobBar"  style="height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div> <!-- end col -->
+                    </div>
+                    <!-- end row-->
+                </div> <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            2022 © Group WJF.
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text-sm-right d-none d-sm-block">
+                                Design & Develop by WJF,CHD,WC,SJS,BJY.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+        <!-- end main content-->
+
+    </div>
+    <!-- END layout-wrapper -->
+
+    <!-- Overlay-->
+    <div class="menu-overlay"></div>
+
+
+    <!-- jQuery  -->
+    <script src="/static/assets/js/jquery.min.js"></script>
+    <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/assets/js/metismenu.min.js"></script>
+    <script src="/static/assets/js/waves.js"></script>
+    <script src="/static/assets/js/simplebar.min.js"></script>
+
+    <!-- Morris Custom Js-->
+    <script src="/static/assets/pages/dashboard-demo.js"></script>
+
+    <!-- App js -->
+    <script src="/static/assets/js/theme.js"></script>
+    <script src="/static/assets/js/echarts.min.js"></script>
+    <script src="/static/assets/js/china.js"></script>
+    <script type="text/javascript">
+        $.ajax({
+            url: '/getjobsalarybyjobcity',
+            method: 'post',
+            data: {
+
+            },
+            dataType: 'json',
+            success: function (data){
+                labels = []
+                values = []
+                for(i = 0; i < data.length; i++){
+                    labels[i] = data[i].jobCity
+                    values[i] = data[i].jobsavg
+                }
+                 console.log(JSON.stringify(data))
+                var chartDom = document.getElementById('jobBar');
+                var myChart = echarts.init(chartDom);
+                var option;
+
+                option = {
+                  xAxis: {
+                    type: 'category',
+                    data: labels
+                  },
+                  yAxis: {
+                    type: 'value'
+                  },
+                  series: [
+                    {
+                      data: values,
+                      type: 'bar',
+                      itemStyle:{
+                          normal:{
+                            color:'#6495ED'
+                          }
+                      }
+                    }
+                  ]
+                };
+
+                option && myChart.setOption(option);
+            },
+            error: function (xhr){
+
+            }
+        })
+    </script>
+<script src="/static/assets/js/area_echarts.js"></script>
+
+</body>
