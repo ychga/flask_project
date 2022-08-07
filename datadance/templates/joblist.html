@@ -59,7 +59,6 @@
         }
         function updateJob(jobId, jobName, jobSalary, jobAddress, jobCompany, jobType){
             document.updateForm.jobId.value = jobId
-            document.updateForm.searchName.value = jobId
             document.updateForm.jobName.value = jobName
             document.updateForm.jobSalary.value = jobSalary
             document.updateForm.jobAddress.value = jobAddress
@@ -119,7 +118,6 @@
                                 <div class="card-body">
                                     <table>
                                         <tr>
-                                            </td>
                                             <td>
                                                 <button type="button" class="btn btn-primary"
                                                 onclick="scrapy()">采集职位详情信息</button>
@@ -127,24 +125,35 @@
                                             <td>
                                                 <button type="button" class="btn btn-primary"
                                                 onclick="similarJob()">职位相似度分析</button>
-                                            </td>
+                                            </td>&nbsp
                                             <td>
                                         <form action="/joblist" method="post" name="searchForm1" class="form-inline">
-                                            <b>工作名：</b>
+                                            <b>名称：</b>
                                             <input type="text" name="search_jobName" class="form-control col-sm">&nbsp
-                                            <b>类型名：</b>
-                                            <input type="text" name="search_jobType" class="form-control col-sm">&nbsp
+                                            <b>地址：</b>
+                                            <input type="text" name="search_jobAddress" class="form-control col-sm">&nbsp
                                             <b>公司名：</b>
                                             <input type="text" name="search_jobCompany" class="form-control col-sm">&nbsp
-                                            <b>地名：</b>
-                                            <input type="text" name="search_jobAddress" class="form-control col-sm">&nbsp
+                                            <b>类型：</b>
+                                            <input type="text" name="search_jobType" class="form-control col-sm">&nbsp
                                             <input type="hidden" name="currentPage" value="1">
                                             <input type="hidden" name="pageSize" value="{{ page.pageSize }}">&nbsp
                                             <button type="submit" class="btn btn-primary" style="font-weight: bold">查询</button>&nbsp
                                         </form>
-
+                                            </td>
                                         </tr>
                                         <tr>
+                                            <td/>
+                                            <td/>
+                                            <td/>
+                                        <form action="/joblist" method="post" name="searchForm2" class="form-inline">
+                                            <b>ID号查询：</b>
+                                            <input type="text" name="search_jobId" class="form-control col-sm">
+                                            <input type="hidden" name="currentPage" value="1">
+                                            <input type="hidden" name="pageSize" value="{{ page.pageSize }}">&nbsp
+                                            <button type="submit" class="btn btn-primary" style="font-weight: bold">查询</button>&nbsp
+                                        </form>
+                                            </td>
                                         </tr>
                                     </table>
                                     <table class="table table-striped dt-responsive nowrap">
@@ -152,7 +161,10 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>名称</th>
-                                                <th>薪资</th>
+                                                <th>
+                                                    <!--<a href="/joblist?newOrder={{ search.jobOrder }}">薪资</a>-->
+                                                    <a href="/joblist?search={{ search }}">薪资</a>
+                                                </th>
                                                 <th>地址</th>
                                                 <th>公司名</th>
                                                 <th>类型</th>
@@ -347,8 +359,10 @@
                             </div>
                         </div>
                         <input type="hidden" name="opr" value="update">
-                        <input type="hidden" name="searchName">
-                        <input type="hidden" name="searchType" value="jobId">
+                        <input type="hidden" name="search_jobName" value="{{ search.jobName }}">
+                        <input type="hidden" name="search_jobAddress" value="{{ search.jobAddress }}">
+                        <input type="hidden" name="search_jobCompany" value="{{ search.jobCompany }}">
+                        <input type="hidden" name="search_jobType" value="{{ search.jobType }}">
                         <input type="hidden" name="currentPage" value="{{ page.currentPage }}">
                         <input type="hidden" name="pageSize" value="{{ page.pageSize }}">
                     </div>
@@ -409,8 +423,10 @@
                             </div>
                         </div>
                         <input type="hidden" name="opr" value="del">
-                        <input type="hidden" name="searchName" value="{{ search.searchName }}">
-                        <input type="hidden" name="searchType" value="{{ search.searchType }}">
+                        <input type="hidden" name="search_jobName" value="{{ search.jobName }}">
+                        <input type="hidden" name="search_jobAddress" value="{{ search.jobAddress }}">
+                        <input type="hidden" name="search_jobCompany" value="{{ search.jobCompany }}">
+                        <input type="hidden" name="search_jobType" value="{{ search.jobType }}">
                         <input type="hidden" name="currentPage" value="{{ page.currentPage }}">
                         <input type="hidden" name="pageSize" value="{{ page.pageSize }}">
                     </div>

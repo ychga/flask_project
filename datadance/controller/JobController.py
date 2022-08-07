@@ -5,7 +5,6 @@ from flask import Blueprint, request, render_template
 from service.JobService import JobService
 import json
 
-
 jobController = Blueprint('jobController', __name__)
 
 
@@ -29,11 +28,13 @@ def getJobCountByJobCity():
     data = jobService.getJobCountByJobCity()
     return json.dumps(data, ensure_ascii=False)
 
+
 @jobController.route('/getjobsalaryandcity', methods=['get', 'post'])
 def getJobSalaryAndCity():
     jobService = JobService()
     data = jobService.getJobSalaryAndCity()
     return json.dumps(data, ensure_ascii=False)
+
 
 @jobController.route('/getjobbycityandtype', methods=['get', 'post'])
 def getJobByCityAndType():
@@ -44,6 +45,9 @@ def getJobByCityAndType():
     return json.dumps(data, ensure_ascii=False)
 
 
+import ast
+
+
 # 分页职位数据管理页面
 @jobController.route('/joblist', methods=['get', 'post'])
 def jobList():
@@ -51,14 +55,19 @@ def jobList():
             'pageSize': 10 if not request.form.get('pageSize') else int(request.form.get('pageSize'))}
 
     page['startRow'] = (page.get('currentPage') - 1) * page.get('pageSize')
-
-    search = {'jobId': request.form.get('search_jobId'),
-              'jobName': request.form.get('search_jobName'),
-              'jobType': request.form.get('search_jobType'),
-              'jobCompany': request.form.get('search_jobCompany'),
-              'jobAddress': request.form.get('search_jobAddress')}
+    search={}
+    # newOrder = (int(request.args.get('newOrder')) + 1) % 3 if request.args.get('newOrder') else 0
+    if request.args.get('search'):
+        search = ast.literal_eval(request.args.get('search'))
+        search["jobOrder"] = (int(search["jobOrder"])+1)%3
+    else:
+        search = {"jobId": request.form.get('search_jobId'),
+                  "jobName": request.form.get('search_jobName'),
+                  "jobType": request.form.get('search_jobType'),
+                  "jobCompany": request.form.get('search_jobCompany'),
+                  "jobAddress": request.form.get('search_jobAddress'),
+                  "jobOrder": 0}
     print(search)
-
     jobService = JobService()
 
     result = 0
@@ -92,13 +101,15 @@ def jobChartPage():
 
 import requests
 from lxml import etree
+
+
 @jobController.route('/scrapyjobdetail', methods=['post', 'get'])
 def scrapyJobDetail():
     search = {}
-    headers = {  "Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
-                 "Connection": "keep-alive",
-                 "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0",
-                 "Upgrade-Insecure-Requests": "1"
+    headers = {"Accept-Language": "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2",
+               "Connection": "keep-alive",
+               "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0",
+               "Upgrade-Insecure-Requests": "1"
                }
 
     page = {'currentPage': 1,
@@ -133,10 +144,11 @@ def scrapyJobDetail():
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.metrics.pairwise import linear_kernel
 import numpy as np
+
+
 @jobController.route('/jobsimilar', methods=['post', 'get'])
 def jobSimilar():
-
-    jobService  = JobService()
+    jobService = JobService()
     jobList = jobService.getAllJobList()
 
     texts = []
@@ -166,11 +178,11 @@ def jobSimilar():
         # 写入数据库
         for row in top10List:
             if row.get('jobId') != job.get('jobId'):
-                data = {'jobId': job.get('jobId'), 'similarJobId': row.get('jobId') }
+                data = {'jobId': job.get('jobId'), 'similarJobId': row.get('jobId')}
                 jobService.createSimilarJob(data)
             pass
-
     pass
+
 
 @jobController.route('/jobdetail', methods=['post', 'get'])
 def getJobDetail():

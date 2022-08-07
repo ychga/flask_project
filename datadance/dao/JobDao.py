@@ -37,36 +37,40 @@ class JobDao(BaseDao):
         return self.fetchall()
 
     # 分页查询方法
+    # search={'jobName':"机械", 'jobType': "机械学习",'jobCompany':"公司", 'jobCity':"北京"}  page={'currentPage':1, 'pageSize':10}
     def getJobPageList(self, search={}, page={}):
-        # search={'jobName':"机械", 'jobType': "机械学习",'jobCompany':"公司", 'jobCity':"北京"}
-        # page={'currentPage':1, 'pageSize':10}
         sql = "select * from t_jobdata where 1=1"  # where 1=1 便于添加and
         params = []
-        if search.get('jobName'):
-            sql += " and jobName like %s"
-            params.append("%" + search.get('jobName') + "%")
-            pass
-        if search.get('jobType'):
-            sql += " and jobType like %s"
-            params.append("%" + search.get('jobType') + "%")
-            pass
-        if search.get('jobCompany'):
-            sql += " and jobCompany like %s"
-            params.append("%" + search.get('jobCompany') + "%")
-            pass
-        if search.get('jobAddress'):
-            sql += " and jobAddress like %s"
-            params.append("%" + search.get('jobAddress') + "%")
-            pass
-        """
-        if search.get('searchType'):
-            if search.get('searchType') == 'jobId':
-                sql += " and {0} = %s".format(search.get('searchType'))
-                params.append(search.get('searchName'))
-            else:
-                sql += " and {0} like %s".format(search.get('searchType'))
-                params.append("%" + search.get('searchName') + "%")
-        """
+        if search.get('jobId'):
+            sql += " and jobId = %s"
+            params.append(search.get('jobId'))
+        else:
+            if search.get('jobName'):
+                sql += " and jobName like %s"
+                params.append("%" + search.get('jobName') + "%")
+                pass
+            if search.get('jobType'):
+                sql += " and jobType like %s"
+                params.append("%" + search.get('jobType') + "%")
+                pass
+            if search.get('jobCompany'):
+                sql += " and jobCompany like %s"
+                params.append("%" + search.get('jobCompany') + "%")
+                pass
+            if search.get('jobAddress'):
+                sql += " and jobAddress like %s"
+                params.append("%" + search.get('jobAddress') + "%")
+                pass
+            if search.get('jobOrder'): # jobOrder不存在或为0时，以默认的id升序排序；为1时，按平均薪资降序排序；为2时，按平均薪资升序排序
+                if search.get('jobOrder') == 1:
+                    sql += " order by jobMeanSalary desc"
+                    pass
+                elif search.get('jobOrder') == 2:
+                    sql += " order by jobMeanSalary asc"
+                    pass
+                pass
+
+
         print(sql)
         print(params)
 
@@ -80,16 +84,28 @@ class JobDao(BaseDao):
 
     # 统计数量
     def getTotalCount(self, search={}):
-        sql= "select count(*) as counts from t_jobdata where 1=1"  # where 1=1 便于添加and
+        sql = "select count(*) as counts from t_jobdata where 1=1"  # where 1=1 便于添加and
         params = []
-        if search.get('searchType'):
-            if search.get('searchType') == 'jobId':
-                sql += " and {0} = %s".format(search.get('searchType'))
-                params.append(search.get('searchName'))
-            else:
-                sql += " and {0} like %s".format(search.get('searchType'))
-                params.append("%" + search.get('searchName') + "%")
-
+        if search.get('jobId'):
+            sql += " and jobId = %s"
+            params.append(search.get('jobId'))
+        else:
+            if search.get('jobName'):
+                sql += " and jobName like %s"
+                params.append("%" + search.get('jobName') + "%")
+                pass
+            if search.get('jobType'):
+                sql += " and jobType like %s"
+                params.append("%" + search.get('jobType') + "%")
+                pass
+            if search.get('jobCompany'):
+                sql += " and jobCompany like %s"
+                params.append("%" + search.get('jobCompany') + "%")
+                pass
+            if search.get('jobAddress'):
+                sql += " and jobAddress like %s"
+                params.append("%" + search.get('jobAddress') + "%")
+                pass
         self.execute(sql, params)
         return self.fetchone()
 
@@ -142,7 +158,7 @@ class JobDao(BaseDao):
 
     def createSimilarJob(self, data={}):
         sql = 'insert into t_similar_job(jobId, similarJobId) values(%s, %s)'
-        result = self.execute(sql,[data.get('jobId'),data.get('similarJobId')])
+        result = self.execute(sql, [data.get('jobId'), data.get('similarJobId')])
         self.commit()
         return result
 
