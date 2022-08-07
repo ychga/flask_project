@@ -118,6 +118,12 @@
                                 <div class="card-body">
                                     <table>
                                         <tr>
+                                            <form action="/add" method="post">
+                                            <td>
+                                            <button data-toggle="modal"onclick="addJob()" class="btn btn-primary" data-target="#addModal">
+                                                        导入</button>
+                                            </td>
+                                            </form>
                                             <td>
                                                 <button type="button" class="btn btn-primary"
                                                 onclick="scrapy()">采集职位详情信息</button>
