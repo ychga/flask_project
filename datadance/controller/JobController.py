@@ -220,6 +220,8 @@ def add():
 def getjobSalaryByJobCity():
     jobService = JobService()
     data = jobService.getJobSalaryStatisticByJobCity()
+    print("jobsc")
+    print(data)
     return json.dumps(data, ensure_ascii=False)
 
 @jobController.route('/jobsalarybyjobcity', methods=['post', 'get'])
