@@ -15,6 +15,8 @@ class JobDao(BaseDao):
               'and (jobMeanSalary not in(select min(jobMeanSalary) from t_jobdata group by jobCity)) ' \
               'group by jobCity order by jobsavg desc;'
         result = self.execute(sql)
+        print(result)
+        print(self.fetchall())
         return self.fetchall()
 
     def getJobSalaryStatisticByJobType(self):
@@ -198,10 +200,11 @@ class JobDao(BaseDao):
             detail = msg[4]  # E
             link = msg[5]  # F
             type = msg[7]  # H
+            city = msg[8]  # I
             # 使用f-string格式化字符串，对sql进行赋值
             sql = (
-                "insert into t_jobdata(jobName, jobSalary, jobAddress, jobCompany,jobLink,jobType, jobDetail) value(%s,%s,%s,%s,%s,%s,%s)")
-            result = self.execute(sql, [name, sal, add, com,link,type, detail])
+                "insert into t_jobdata(jobName, jobSalary, jobAddress, jobCompany,jobLink,jobType, jobDetail, jobCity) value(%s,%s,%s,%s,%s,%s,%s,%s)")
+            result = self.execute(sql, [name, sal, add, com,link,type, detail,city])
         self.commit()
         print("插入数据完成！")
         return result
